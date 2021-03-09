@@ -1,0 +1,20 @@
+version: '3.8'
+
+services: 
+  # MongoDB 服务器
+  mongodb-server:
+    container_name: exert-mongodb-server
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - /host/mongodb/data:/data/db
+      - /host/mongodb/config:/data/configdb
+    networks:
+      - exert-mongodb-net
+
+networks:
+  exert-mongodb-net:
+    name: exert-mongodb-net
+    driver: bridge
