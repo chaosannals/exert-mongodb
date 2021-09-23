@@ -4,13 +4,13 @@ services:
   # MongoDB 服务器
   mongodb-server:
     container_name: exert-mongodb-server
-    image: mongo
+    image: mongo:5.0.3
     restart: always
     ports:
       - "27017:27017"
     volumes:
-      - /host/mongodb/data:/data/db
-      - /host/mongodb/config:/data/configdb
+      - ./asset/data:/data/db
+      - ./asset/conf:/data/configdb
     networks:
       - exert-mongodb-net
 
