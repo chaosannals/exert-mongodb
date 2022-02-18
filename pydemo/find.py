@@ -20,3 +20,20 @@ rs = client.test.mdoc.find(
 
 for r in rs:
     print(r)
+
+print('==============================')
+
+rts = client.test.mdoc.find(
+    {
+        '$text': { '$search': 'text 台中' },
+    },
+    projection={
+        'score': { '$meta': 'textScore', },
+    },
+    skip=10,
+    limit=10,
+    sort=[('score', { '$meta': 'textScore' })]
+)
+
+for rt in rts:
+    print(rt)
