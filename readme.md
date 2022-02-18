@@ -36,3 +36,24 @@ net:
   port: 27017
   bindIp: 0.0.0.0
 ```
+
+
+## 事务
+
+注：mongo 的事务是分布式事务，基于集群，所以必须以集群才能使用。配置为单节点模式无法使用。
+
+配置文件 给 本地节点 mongo 服务器 指定个名字。
+```yaml
+replication:
+  replSetName: rs0
+```
+
+进入命令行模式
+```bash
+mongo
+```
+
+命令行下配置集群，指定 集群节点（只有1个），并指定该节点为主节点。
+```mongosh
+rs.initiate({_id:"rs0", members:[{_id:0,host: "127.0.0.1:27017",priority:1}]})
+```
