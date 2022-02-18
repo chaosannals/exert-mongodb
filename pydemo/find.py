@@ -7,6 +7,9 @@ r1 = client.test.mdoc.find_one({
     'nos': {'$regex': '1', },
 })
 
+if r1 is None:
+    print('r1 is None')
+
 print(r1)
 
 rs = client.test.mdoc.find(
