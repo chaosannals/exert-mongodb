@@ -37,6 +37,15 @@ net:
   bindIp: 0.0.0.0
 ```
 
+### mongosh 授权
+
+```bash
+db.auth({
+  user: 'root',
+  pwd: 'root',
+  mechanism: 'SCRAM-SHA-256'
+})
+```
 
 ## 事务
 

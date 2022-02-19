@@ -1,16 +1,45 @@
 version: '3.8'
 
 services: 
-  # MongoDB 服务器
-  mongodb-server:
-    container_name: exert-mongodb-server
+  # MongoDB 服务器 1
+  mongodb-server-1:
+    container_name: exert-mongodb-server-1
     image: mongo:5.0.3
     restart: always
     ports:
-      - "27017:27017"
+      - "27001:27017"
     volumes:
-      - ./asset/data:/data/db
-      - ./asset/conf:/data/configdb
+      - ./asset/s1/data:/data/db
+      - ./asset/s1/conf:/data/configdb
+    entrypoint: mongod --config /data/configdb/mongo.yml
+    networks:
+      - exert-mongodb-net
+
+  # MongoDB 服务器 2
+  mongodb-server-2:
+    container_name: exert-mongodb-server-2
+    image: mongo:5.0.3
+    restart: always
+    ports:
+      - "27002:27017"
+    volumes:
+      - ./asset/s2/data:/data/db
+      - ./asset/s2/conf:/data/configdb
+    entrypoint: mongod --config /data/configdb/mongo.yml
+    networks:
+      - exert-mongodb-net
+
+  # MongoDB 服务器 3
+  mongodb-server-3:
+    container_name: exert-mongodb-server-3
+    image: mongo:5.0.3
+    restart: always
+    ports:
+      - "27003:27017"
+    volumes:
+      - ./asset/s3/data:/data/db
+      - ./asset/s3/conf:/data/configdb
+    entrypoint: mongod --config /data/configdb/mongo.yml
     networks:
       - exert-mongodb-net
 
