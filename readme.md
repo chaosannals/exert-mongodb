@@ -71,10 +71,12 @@ rs.initiate({_id:"rs0", members:[{_id:0,host: "127.0.0.1:27017",priority:1}]})
 
 1. 执行 mkini.py 初始化无需账号的配置
 2. docker compose up -d 启动容器
-3. 执行 mkusr.bat 批量创建账号
+3. 执行 mkusr.bat 批量创建账号（如果失败，等多一会，等服务启动完成）
 4. 执行 mkcnf.py 重置配置为需要账号且集群化的配置
 5. docker compose restart 重启容器
 6. 执行 mkrep.bat 配置集群各个节点路由（如果失败，等多一会，配置分布式后节点重启会比较久。）
+
+注：如果重试，要删掉数据库的所有数据文件。
 
 ### 大概流程
 
@@ -118,3 +120,21 @@ rs.add("exert-mongodb-server-1:27017")
 rs.add("exert-mongodb-server-2:27017")
 rs.add("exert-mongodb-server-3:27017")
 ```
+
+注：使用多个地址链接时，需要开启 TLS 加密
+
+## Mongo Compress
+
+分布式下，可以通过单机模式直连 directConnection=true 。
+
+```
+mongodb://root:rootpwd@localhost:27001/?authSource=admin&authMechanism=SCRAM-SHA-256&replicaSet=sn&readPreference=secondary&appname=MongoDB%20Compass&directConnection=true&ssl=false
+
+mongodb://root:rootpwd@localhost:27002/?authSource=admin&authMechanism=SCRAM-SHA-256&replicaSet=sn&readPreference=secondary&appname=MongoDB%20Compass&directConnection=true&ssl=false
+
+mongodb://root:rootpwd@localhost:27003/?authSource=admin&authMechanism=SCRAM-SHA-256&replicaSet=sn&readPreference=secondary&appname=MongoDB%20Compass&directConnection=true&ssl=false
+```
+
+## SRV
+
+是分布式下通过域名解析，一个域名访问多个节点。
