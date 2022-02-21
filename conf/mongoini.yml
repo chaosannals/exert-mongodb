@@ -1,0 +1,13 @@
+net:
+  port: 27017
+  bindIp: 0.0.0.0
+
+# replication:
+#   replSetName: sn
+
+security:
+  # authorization: ensabled
+  # keyFile: /data/mongo.key
+  # clusterAuthMode: keyFile
+  authorization: disabled
+  javascriptEnabled: false

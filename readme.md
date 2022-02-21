@@ -66,3 +66,55 @@ mongo
 ```mongosh
 rs.initiate({_id:"rs0", members:[{_id:0,host: "127.0.0.1:27017",priority:1}]})
 ```
+
+## Docker示例执行副本集设置
+
+1. 执行 mkini.py 初始化无需账号的配置
+2. docker compose up -d 启动容器
+3. 执行 mkusr.bat 批量创建账号
+4. 执行 mkcnf.py 重置配置为需要账号且集群化的配置
+5. docker compose restart 重启容器
+6. 执行 mkrep.bat 配置集群各个节点路由（如果失败，等多一会，配置分布式后节点重启会比较久。）
+
+### 大概流程
+
+注： keyFile 的文件权限必须 400 ，所属用户必须是 mongod 进程的用户。
+
+```bash
+db.auth({
+  user: 'root',
+  pwd: 'rootpwd',
+  mechanism: 'SCRAM-SHA-256'
+})
+
+use admin
+db.createUser({
+  user: 'root',
+  pwd: 'rootpwd',
+  roles: ['root']
+})
+db.createUser({
+  user: 'root',
+  pwd: 'rootpwd',
+  roles: [{ role: 'userAdminAnyDatabase', db:'admin'}]
+})
+
+
+# 查询状态
+rs.status()
+rs.conf()
+
+# 一次配置
+rs.initiate({
+  _id:"sn", members:[
+    { _id:0,host: "exert-mongodb-server-1:27017" },
+    { _id:1,host: "exert-mongodb-server-2:27017" },
+    { _id:2,host: "exert-mongodb-server-3:27017" }
+  ]
+})
+# 或者
+rs.initiate()
+rs.add("exert-mongodb-server-1:27017")
+rs.add("exert-mongodb-server-2:27017")
+rs.add("exert-mongodb-server-3:27017")
+```

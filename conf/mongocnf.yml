@@ -12,3 +12,4 @@ security:
   # authorization: disabled
   javascriptEnabled: false
   keyFile: /data/mongo.key
+  clusterAuthMode: keyFile

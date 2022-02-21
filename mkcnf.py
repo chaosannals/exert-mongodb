@@ -27,7 +27,8 @@ def make_config(cnf_template_path='conf/mongocnf.yml'):
 
             # 配置文件
             p = f'{d}/mongo.yml'
-            cnf['replication']['replSetName'] = f's{i}'
+            # 同个备份集的节点，备份集名字必须一样。
+            cnf['replication']['replSetName'] = f'sn'
             with open(p, 'w', encoding='utf8') as writer:
                 yaml.dump(cnf, writer)
 
