@@ -1,3 +1,6 @@
 /.*/
 /asset/
 __pycache__
+*.crt
+*.key
+*.pem
