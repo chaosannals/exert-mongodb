@@ -14,14 +14,14 @@ rs1 = client.test.mdoc.aggregate([
             # 用到字段的时候要用 $ 开头。
             # '_id': ['$no', '$nos'],
             # '_id': '$no',
-            '_id': { 'no': '$no', 'no2': '$nos' },
-            'count': { '$sum': 1 },
-            'stext': { '$first': '$stext' },
-            'skeys': { '$last': '$skeys' },
+            '_id': {'no': '$no', 'no2': '$nos'},
+            'count': {'$sum': 1},
+            'stext': {'$first': '$stext'},
+            'skeys': {'$last': '$skeys'},
         },
     },
     {
-        '$sort': { 'count': -1 },
+        '$sort': {'count': -1},
     },
     {
         '$skip': 10,
@@ -56,7 +56,7 @@ rs3 = client.test.mdoc.aggregate([
     {
         # 字段名加 $ 前缀
         '$lookup': {
-            'localField': 'no', # mdoc.no
+            'localField': 'no',  # mdoc.no
             'from': 'tdoc',
             'foreignField': 'tid',
             'as': 'tdata',
@@ -68,4 +68,24 @@ rs3 = client.test.mdoc.aggregate([
 ])
 
 for r in rs3:
+    print(r)
+
+
+print('----------------------------------------')
+rs4 = client.test.mdoc.aggregate([
+    {
+        # 字段名加 $ 前缀
+        '$lookup': {
+            'localField': 'no',  # mdoc.no
+            'from': 'tdoc',
+            'foreignField': 'tid',
+            'as': 'tdata',
+        },
+    },
+],
+    allowDiskUse=True, # 使用允许使用磁盘缓存
+    # explain=True,# 该方法不支持，查看方法注释，提示使用 pymongo.database.Database.command
+)
+
+for r in rs4:
     print(r)
