@@ -33,3 +33,39 @@ rs1 = client.test.mdoc.aggregate([
 
 for r in rs1:
     print(r)
+
+print('----------------------------------------')
+rs2 = client.test.mdoc.aggregate([
+    {
+        # 字段名加 $ 前缀
+        '$unwind': '$skeys',
+    },
+    {
+        '$skip': 10,
+    },
+    {
+        '$limit': 10
+    },
+])
+
+for r in rs2:
+    print(r)
+
+print('----------------------------------------')
+rs3 = client.test.mdoc.aggregate([
+    {
+        # 字段名加 $ 前缀
+        '$lookup': {
+            'localField': 'no', # mdoc.no
+            'from': 'tdoc',
+            'foreignField': 'tid',
+            'as': 'tdata',
+        },
+    },
+    {
+        '$limit': 10
+    },
+])
+
+for r in rs3:
+    print(r)
