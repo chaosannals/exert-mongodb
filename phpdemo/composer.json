@@ -1,0 +1,14 @@
+{
+    "name": "chaosannals/exert-mongodb-php",
+    "description": "mongodb php demo",
+    "type": "project",
+    "authors": [
+        {
+            "name": "chaosannals",
+            "email": "chaosannals@outlook.com"
+        }
+    ],
+    "require": {
+        "mongodb/mongodb": "^1.6"
+    }
+}
