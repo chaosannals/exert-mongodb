@@ -4,10 +4,11 @@ import (
 	"context"
 	"log"
 	"time"
+
+	"github.com/chaosannals/exert-mongodb-godriver/crud"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
-	"github.com/chaosannals/exert-mongodb-godriver/crud"
 )
 
 func main() {
@@ -15,8 +16,8 @@ func main() {
 	defer cancel()
 	client, err := mongo.Connect(ctx, options.Client().ApplyURI("mongodb://localhost:27017").SetAuth(options.Credential{
 		AuthMechanism: "SCRAM-SHA-256",
-		Username: "root",
-		Password: "root",
+		Username:      "root",
+		Password:      "root",
 	}).SetDirect(true))
 	if err != nil {
 		panic(err)
@@ -35,4 +36,8 @@ func main() {
 	crud.InsertOneDemo(collection, ctx)
 	crud.InsertManyDemo(collection, ctx)
 	crud.FindDemo(collection, ctx)
+	crud.UpdateOneDemo(collection, ctx)
+	crud.UpdateManyDemo(collection, ctx)
+	crud.RemoveOneDemo(collection, ctx)
+	crud.RemoveManyDemo(collection, ctx)
 }

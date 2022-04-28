@@ -4,11 +4,13 @@ import (
 	"context"
 	"fmt"
 	"log"
+
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
 func FindDemo(collection *mongo.Collection, ctx context.Context) {
+	log.Println("========= find ==========")
 	cur, err := collection.Find(ctx, bson.D{})
 	if err != nil {
 		panic(err)
