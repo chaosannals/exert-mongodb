@@ -1,1 +1,0 @@
-docker exec -it exert-mongodb-server-1 mongo -u root -p rootpwd --eval "rs.initiate({ _id:'sn', members:[{ _id:0,host: 'exert-mongodb-server-1:27017' }, { _id:1,host: 'exert-mongodb-server-2:27017' }, { _id:2,host: 'exert-mongodb-server-3:27017' }]})" 127.0.0.1:27017/admin
