@@ -69,6 +69,8 @@ rs.initiate({_id:"rs0", members:[{_id:0,host: "127.0.0.1:27017",priority:1}]})
 
 ## Docker示例执行副本集设置
 
+注：不是 Shared Cluster 模式。
+
 1. 执行 mkini.py 初始化无需账号的配置
 2. docker compose up -d 启动容器
 3. 执行 mkusr.bat 批量创建账号（如果失败，等多一会，等服务启动完成，在没有删除 docker 挂载的数据库 data 目录情况下，可能之前已经创建好了，会提示已经存在，跳过这步。）
@@ -102,9 +104,12 @@ db.createUser({
 })
 
 
-# 查询状态
+# 查询状态可以看到集群状态
 rs.status()
 rs.conf()
+
+# 判断是否是分布式下的主节点
+rs.isMaster()
 
 # 一次配置
 rs.initiate({

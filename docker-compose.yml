@@ -1,6 +1,20 @@
 version: '3.8'
 
 services: 
+  # mongodb-server-configsvr:
+  #   container_name: exert-mongodb-configsvr
+  #   build:
+  #     context: .
+  #     dockerfile: dockerfile
+  #   restart: always
+  #   ports:
+  #     - "27004:27017"
+  #   volumes:
+  #     - ./asset/s4/data:/data/db
+  #     - ./asset/s4/conf:/data/configdb:ro
+  #   networks:
+  #     - exert-mongodb-net
+
   # MongoDB 服务器 1
   mongodb-server-1:
     container_name: exert-mongodb-server-1
