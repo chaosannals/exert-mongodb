@@ -4,7 +4,7 @@ services:
   # 路由服务器
   mongodb-router:
     container_name: exert-mongodb-router
-    # image: TODO
+    image: mongo:6.0.3
     restart: always
     ports:
       - "27040:27017"
@@ -17,7 +17,7 @@ services:
   # 配置服务器（3个）
   mongodb-config-server-1:
     container_name: exert-mongodb-config-server-1
-    # image: TODO
+    image: mongo:6.0.3
     # build:
     #   context: .
     #   dockerfile: dockerfile
@@ -32,7 +32,7 @@ services:
 
   mongodb-config-server-2:
     container_name: exert-mongodb-config-server-2
-    # image: TODO
+    image: mongo:6.0.3
     build:
       context: .
       dockerfile: dockerfile
@@ -47,7 +47,7 @@ services:
 
   mongodb-config-server-3:
     container_name: exert-mongodb-config-server-3
-    # image: TODO
+    image: mongo:6.0.3
     build:
       context: .
       dockerfile: dockerfile
@@ -63,7 +63,7 @@ services:
   # 分片 1 （3个节点）
   mongodb-shard-1-server-1:
     container_name: exert-mongodb-shard-1-server-1
-    # image: TODO
+    image: mongo:6.0.3
     ports:
       - "27141:27017"
     volumes:
@@ -74,7 +74,7 @@ services:
 
   mongodb-shard-1-server-2:
     container_name: exert-mongodb-shard-1-server-2
-    # image: TODO
+    image: mongo:6.0.3
     ports:
       - "27142:27017"
     volumes:
@@ -85,7 +85,7 @@ services:
 
   mongodb-shard-1-server-3:
     container_name: exert-mongodb-shard-1-server-3
-    # image: TODO
+    image: mongo:6.0.3
     ports:
       - "27143:27017"
     volumes:
@@ -97,7 +97,7 @@ services:
   # 分片2 （3个节点）
   mongodb-shard-2-server-1:
     container_name: exert-mongodb-shard-2-server-1
-    # image: TODO
+    image: mongo:6.0.3
     ports:
       - "27241:27017"
     volumes:
@@ -108,7 +108,7 @@ services:
 
   mongodb-shard-2-server-2:
     container_name: exert-mongodb-shard-2-server-2
-    # image: TODO
+    image: mongo:6.0.3
     ports:
       - "27242:27017"
     volumes:
@@ -119,7 +119,7 @@ services:
 
   mongodb-shard-2-server-3:
     container_name: exert-mongodb-shard-2-server-3
-    # image: TODO
+    image: mongo:6.0.3
     ports:
       - "27243:27017"
     volumes:
