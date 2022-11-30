@@ -1,0 +1,13 @@
+# 配置服务器模板 TODO
+
+sharding:
+  clusterRole: configsvr
+  archiveMovedChunks: true
+
+net:
+  port: 27017
+  bindIp: 0.0.0.0
+
+# 备份节点设置
+replication:
+  replSetName: '{replSetName}'

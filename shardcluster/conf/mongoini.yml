@@ -1,0 +1,9 @@
+# 尽量少的配置，用于启动 TODO
+
+net:
+  port: 27017
+  bindIp: 0.0.0.0
+
+security:
+  authorization: disabled
+  javascriptEnabled: false

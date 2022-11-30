@@ -1,0 +1,21 @@
+# shard 配置模板 TODO
+
+sharding:
+  clusterRole: shardsvr
+  archiveMovedChunks: true
+
+net:
+  port: 27017
+  bindIp: 0.0.0.0
+
+# 备份节点设置
+replication:
+  replSetName: '{replSetName}'
+
+# 是否启用认证和JS
+security:
+  authorization: enabled
+  # authorization: disabled
+  javascriptEnabled: false
+  keyFile: /data/mongo.key
+  clusterAuthMode: keyFile

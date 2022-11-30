@@ -1,12 +1,26 @@
 version: '3.8'
 
-# TODO
 services: 
-  mongodb-server-configsvr:
-    container_name: exert-mongodb-configsvr
-    build:
-      context: .
-      dockerfile: dockerfile
+  # 路由服务器
+  mongodb-router:
+    container_name: exert-mongodb-router
+    # image: TODO
+    restart: always
+    ports:
+      - "27040:27017"
+    volumes:
+      - ./asset/r/data:/data/db
+      - ./asset/r/conf:/data/configdb:ro
+    networks:
+      - exert-mongodb-sc-net
+
+  # 配置服务器（3个）
+  mongodb-config-server-1:
+    container_name: exert-mongodb-config-server-1
+    # image: TODO
+    # build:
+    #   context: .
+    #   dockerfile: dockerfile
     restart: always
     ports:
       - "27041:27017"
@@ -15,6 +29,106 @@ services:
       - ./asset/c1/conf:/data/configdb:ro
     networks:
       - exert-mongodb-sc-net
+
+  mongodb-config-server-2:
+    container_name: exert-mongodb-config-server-2
+    # image: TODO
+    build:
+      context: .
+      dockerfile: dockerfile
+    restart: always
+    ports:
+      - "27042:27017"
+    volumes:
+      - ./asset/c2/data:/data/db
+      - ./asset/c2/conf:/data/configdb:ro
+    networks:
+      - exert-mongodb-sc-net
+
+  mongodb-config-server-3:
+    container_name: exert-mongodb-config-server-3
+    # image: TODO
+    build:
+      context: .
+      dockerfile: dockerfile
+    restart: always
+    ports:
+      - "27043:27017"
+    volumes:
+      - ./asset/c3/data:/data/db
+      - ./asset/c3/conf:/data/configdb:ro
+    networks:
+      - exert-mongodb-sc-net
+
+  # 分片 1 （3个节点）
+  mongodb-shard-1-server-1:
+    container_name: exert-mongodb-shard-1-server-1
+    # image: TODO
+    ports:
+      - "27141:27017"
+    volumes:
+      - ./asset/s1s1/data:/data/db
+      - ./asset/s1s1/conf:/data/configdb:ro
+    networks:
+      - exert-mongodb-sc-net
+
+  mongodb-shard-1-server-2:
+    container_name: exert-mongodb-shard-1-server-2
+    # image: TODO
+    ports:
+      - "27142:27017"
+    volumes:
+      - ./asset/s1s2/data:/data/db
+      - ./asset/s1s2/conf:/data/configdb:ro
+    networks:
+      - exert-mongodb-sc-net
+
+  mongodb-shard-1-server-3:
+    container_name: exert-mongodb-shard-1-server-3
+    # image: TODO
+    ports:
+      - "27143:27017"
+    volumes:
+      - ./asset/s1s3/data:/data/db
+      - ./asset/s1s3/conf:/data/configdb:ro
+    networks:
+      - exert-mongodb-sc-net
+
+  # 分片2 （3个节点）
+  mongodb-shard-2-server-1:
+    container_name: exert-mongodb-shard-2-server-1
+    # image: TODO
+    ports:
+      - "27241:27017"
+    volumes:
+      - ./asset/s2s1/data:/data/db
+      - ./asset/s2s1/conf:/data/configdb:ro
+    networks:
+      - exert-mongodb-sc-net
+
+  mongodb-shard-2-server-2:
+    container_name: exert-mongodb-shard-2-server-2
+    # image: TODO
+    ports:
+      - "27242:27017"
+    volumes:
+      - ./asset/s2s2/data:/data/db
+      - ./asset/s2s2/conf:/data/configdb:ro
+    networks:
+      - exert-mongodb-sc-net
+
+  mongodb-shard-2-server-3:
+    container_name: exert-mongodb-shard-2-server-3
+    # image: TODO
+    ports:
+      - "27243:27017"
+    volumes:
+      - ./asset/s2s3/data:/data/db
+      - ./asset/s2s3/:/data/
+      - ./asset/s2s3/conf:/data/configdb:ro
+    networks:
+      - exert-mongodb-sc-net
+
 
 networks:
   exert-mongodb-sc-net:
