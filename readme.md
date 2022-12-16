@@ -75,3 +75,14 @@ cfg.members[1].priority = 2
 cfg.members[2].priority = 3
 rs.reconfig(cfg)
 ```
+
+```mongosh
+// 冻结该节点，使其在 120 秒内无法成为主节点
+rs.freeze(120)
+
+// 无限期冻结
+rs.freeze()
+
+// 降职该节点，使其在 120 秒内无法成为主节点
+rs.stepDown(120)
+```
