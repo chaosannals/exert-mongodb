@@ -66,3 +66,12 @@ mongo
 ```mongosh
 rs.initiate({_id:"rs0", members:[{_id:0,host: "127.0.0.1:27017",priority:1}]})
 ```
+
+```mongosh
+// 获取集群配置, 重置配置信息。
+cfg = rs.conf()
+cfg.members[0].priority = 10
+cfg.members[1].priority = 2
+cfg.members[2].priority = 3
+rs.reconfig(cfg)
+```
