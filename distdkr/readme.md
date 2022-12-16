@@ -64,6 +64,10 @@ rs.add("exert-mongodb-server-3:27017")
 分布式下，可以通过单机模式直连 directConnection=true 。由于主机是运行时选举的，所以链接的时候能直连的有可能是（示例是 27001 27002 27003） 任意一个，要试试哪个是主要的才能直连写入。
 
 ```
+mongodb://root:rootpwd@localhost:27001/?authSource=admin&authMechanism=SCRAM-SHA-256&replicaSet=sn&readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false
+```
+
+```
 mongodb://root:rootpwd@localhost:27001/?authSource=admin&authMechanism=SCRAM-SHA-256&replicaSet=sn&readPreference=secondary&appname=MongoDB%20Compass&directConnection=true&ssl=false
 
 mongodb://root:rootpwd@localhost:27002/?authSource=admin&authMechanism=SCRAM-SHA-256&replicaSet=sn&readPreference=secondary&appname=MongoDB%20Compass&directConnection=true&ssl=false
