@@ -86,3 +86,8 @@ rs.freeze()
 // 降职该节点，使其在 120 秒内无法成为主节点
 rs.stepDown(120)
 ```
+
+
+## FerretDB
+
+实现了 MongoDB 接口协议，实质上只是转接到 PostgreSQL 数据库。
